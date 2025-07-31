@@ -1,4 +1,5 @@
 # monitor_appThree
+# pip install PyQt5 psutil matplotlib openpyxl
 # ถ้าจะจับMATLAB อย่าลืมสร้างไฟล์ temp ที่ drive c เเละใน code MATLAB ต้องมี 
 % ---------- เริ่มตรวจจับ ---------- 
 pid = feature('getpid');  % ดึง PID ของ MATLAB เอง
