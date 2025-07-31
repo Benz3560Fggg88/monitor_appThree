@@ -1,14 +1,23 @@
 # monitor_appThree
 # ถ้าจะจับMATLAB อย่าลืมสร้างไฟล์ temp ที่ drive c เเละใน code MATLAB ต้องมี 
-% ---------- เริ่มตรวจจับ ----------
-fid = fopen('C:\temp\monitoring_flag.txt', 'w'); fclose(fid);
-% -----------------------------------
+% ---------- เริ่มตรวจจับ ---------- 
+pid = feature('getpid');  % ดึง PID ของ MATLAB เอง
+fid = fopen('C:\temp\training_pid.txt', 'w');
+if fid == -1
+    error('ไม่สามารถเปิดไฟล์ C:\temp\training_pid.txt เพื่อเขียนได้');
+end
+fprintf(fid, '%d\n', pid);
+fclose(fid);
+% ----------------------------------- 
 .
 .
 .
 end
 
-% ----------- จบการตรวจจับ ----------
-pause(1);  % เผื่อเวลาให้ Python จับได้
-delete('C:\temp\monitoring_flag.txt');
+% ---------- จบการตรวจจับ ----------
+pause(1);  % รอให้ Python ตรวจจับให้ทัน
+if exist('C:\temp\training_pid.txt', 'file')
+    delete('C:\temp\training_pid.txt');
+    fprintf('ลบไฟล์ PID เรียบร้อย\n');
+end
 % ------------------------------------
